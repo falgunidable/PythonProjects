@@ -2,44 +2,51 @@ import sys
 import random
 from enum import Enum
 
-class RPS(Enum):
-    ROCK = 1
-    PAPER = 2
-    SCISSOR = 3
+def play_rps():
+    class RPS(Enum):
+        ROCK = 1
+        PAPER = 2
+        SCISSOR = 3
 
-# print(RPS(2))
-playagain = True
+    # print(RPS(2))
 
-while playagain:
-    value = int(input("\nEnter 1 for Rock: \nEnter 2 for Paper: \nEnter 3 for Scissor: \n\n"))
+    value = input("\nEnter 1 for Rock: \nEnter 2 for Paper: \nEnter 3 for Scissor: \n\n")
 
+    if value not in ["1", "2", "3"]:
+        print("You must enter 1, 2, or 3.")
+        return play_rps()
+    
+    player = int(value)
+    computerchoice = random.choice("123")
+    computer = int(computerchoice)
 
-    if value < 1 or value > 3:
-        print("\nYou must enter 1, 2 or 3 !!\n\n")
+    print("\nYou Entered: " + str(RPS(player)).replace("RPS.",""))
+    print("\nPython Entered: " + str(RPS(computer)).replace("RPS.","") + "\n")
+
+    if player == 2 and computer == 1:
+        print("You Win !!\n")
+    elif player == 1 and computer == 3:
+        print("You Win !!\n")
+    elif player == 3 and computer == 2:
+        print("You Win !!\n")
+    elif player == computer:
+        print("\nIt's a draw !!\n")
     else:
-        computerchoice = random.choice("123")
-        computer = int(computerchoice)
+        print("\nPython Wins !!\n")
 
-        print("\nYou Entered: " + str(RPS(value)).replace("RPS.",""))
-        print("\nPython Entered: " + str(RPS(computer)).replace("RPS.","") + "\n")
+    print("\nPlay again?")
 
-        if value == 2 and computer == 1:
-            print("You Win !!\n")
-        elif value == 1 and computer == 3:
-            print("You Win !!\n")
-        elif value == 3 and computer == 2:
-            print("You Win !!\n")
-        elif value == computer:
-            print("\nIt's a draw !!\n")
-        else:
-            print("\nPython Wins !!\n")
-
-        choice = input("Want to try your luck again:\n\nType:\n Y to Yes\n Q to Quit\n\n")
-
-        if choice.lower() == 'y':
+    while True:
+        choice = input("\nY for Yes or \nQ to Quit\n")
+        if choice.lower() not in ["y", "q"]:
             continue
         else:
-            print("\nThank You for playing !!\n")
-            playagain = False
+            break
 
-sys.exit("BYE !\n\n")
+    if choice.lower() == 'y':
+        return play_rps()
+    else:
+        print("\nThank You for playing !!\n")
+        sys.exit("BYE !\n\n")
+
+play_rps()
