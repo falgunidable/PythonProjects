@@ -20,8 +20,8 @@ def play_rps():
     computerchoice = random.choice("123")
     computer = int(computerchoice)
 
-    print("\nYou Entered: " + str(RPS(player)).replace("RPS.",""))
-    print("\nPython Entered: " + str(RPS(computer)).replace("RPS.","") + "\n")
+    print(f"\nYou Entered: {str(RPS(player)).replace('RPS.','')}")
+    print(f"\nPython Entered: {str(RPS(computer)).replace('RPS.','')}\n")
 
     if player == 2 and computer == 1:
         print("You Win !!\n")
@@ -50,3 +50,4 @@ def play_rps():
         sys.exit("BYE !\n\n")
 
 play_rps()
+
