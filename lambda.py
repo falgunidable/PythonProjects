@@ -23,3 +23,5 @@ print(list(squre))
 
 odd_nums = filter(lambda num : num % 2 != 0, numbers)
 print(list(odd_nums))
+
+#   higher order functions - if function passed as an argument or as a return type
