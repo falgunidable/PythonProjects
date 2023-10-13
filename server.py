@@ -28,7 +28,7 @@ def get_weather():
 
     return render_template(
         "weather.html",
-        title = weather_data['location']['name'],
+        title = 'Pune' if weather_data['location']['name'] == '' else weather_data['location']['name'],
         feels_like = f"{weather_data['current']['feelslike_c']:.1f}",
         calc_on = weather_data['location']['localtime']
     )
