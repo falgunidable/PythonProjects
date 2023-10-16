@@ -23,7 +23,8 @@
   <body
     class="custome-h d-flex justify-content-center align-items-center bg-secondary-subtle"
   >
-    <div class="p-5 bg-secondary w-50 rounded-3 text-white text-center">
+    <div class="p-5 bg-light w-50 rounded-4 text-secondary text-center">
+      <img src="{{ url_for('static', filename='images/welcome.gif') }}" />
       <h3 class="mb-5"><b>{{msg}}</b></h3>
       <h4>Hii {{session.username}}</h4>
       <a
