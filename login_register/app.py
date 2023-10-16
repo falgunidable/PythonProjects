@@ -1,19 +1,21 @@
 from flask import Flask, render_template, request, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors as c
-import os
-import re
+import os, re
+from dotenv import load_dotenv
 from waitress import serve
 
-app = Flask(__name__ , static_folder='static')
+load_dotenv() 
+
+app = Flask(__name__)
 
 secret_key = os.urandom(24).hex()
 app.secret_key = secret_key
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'signinsignup'
+app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST')
+app.config['MYSQL_USER'] = os.getenv('MYSQL_USERNAME')
+app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
+app.config['MYSQL_DB'] = os.getenv('MYSQL_DB')
 
 mysql = MySQL(app)
 
@@ -36,13 +38,13 @@ def register():
         elif not re.match(r'[A-Za-z0-9]+', username):
             msg = 'Username must start with a character !'
         elif not re.match(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!]).{10}$', password):
-            msg = 'Password must be 10 characters long containing an alphabet, special character & a number !'
+            msg = 'Password must be 10 characters long having a capital letter, a special character & a number !'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             msg = 'Invalid email address !'
         else:
             cursor.execute('INSERT INTO accounts VALUES (NULL, % s, % s, % s)', (username, password, email))
             mysql.connection.commit()
-            msg = 'You have successfully registered !'
+            msg = 'You have Successfully Registered !'
     elif request.method == 'POST':
             msg = 'Please fill out the form !'
 
