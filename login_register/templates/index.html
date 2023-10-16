@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Account Details</title>
     <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
@@ -20,9 +24,13 @@
     class="custome-h d-flex justify-content-center align-items-center bg-secondary-subtle"
   >
     <div class="p-5 bg-secondary w-50 rounded-3 text-white text-center">
-      <h3 class="mb-5"><b>Welcome Back !!</b></h3>
-      <h4>Hii</h4>
-      <button class="btn btn-outline-light mt-4 col-md-6">Logout</button>
+      <h3 class="mb-5"><b>{{msg}}</b></h3>
+      <h4>Hii {{session.username}}</h4>
+      <a
+        class="btn btn-outline-light mt-4 col-md-6 text-decoration-none"
+        href="{{url_for('logout')}}"
+        >Logout</a
+      >
     </div>
   </body>
 </html>

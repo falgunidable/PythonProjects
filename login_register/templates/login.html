@@ -24,8 +24,13 @@
     class="d-flex justify-content-center align-items-center bg-secondary-subtle"
   >
     <div class="p-5 bg-secondary w-35 rounded-3">
-      <h3 class="text-center mb-5 text-white"><b>Login to Your Account!</b></h3>
-      <form action="" method="post" class="vstack gap-md-4">
+      <h3 class="text-center mb-4 text-white"><b>Login to Your Account!</b></h3>
+      <h6 class="text-center mb-3 text-white-50"><b>{{ msg }}</b></h6>
+      <form
+        action="{{ url_for('login') }}"
+        method="post"
+        class="vstack gap-md-4"
+      >
         <input
           class="p-2 rounded-2 border-0 form-control mt-3"
           type="text"
