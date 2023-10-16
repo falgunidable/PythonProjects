@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors as c
 import os
+import re
 from waitress import serve
 
 app = Flask(__name__ , static_folder='static')
@@ -32,6 +33,12 @@ def register():
             msg = 'Account Already Exists !'
         elif not username or not password or not email:
             msg = 'Please fill out the fields...'
+        elif not re.match(r'[A-Za-z0-9]+', username):
+            msg = 'Username must start with a character !'
+        elif not re.match(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!]).{10}$', password):
+            msg = 'Password must be 10 characters long containing an alphabet, special character & a number !'
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            msg = 'Invalid email address !'
         else:
             cursor.execute('INSERT INTO accounts VALUES (NULL, % s, % s, % s)', (username, password, email))
             mysql.connection.commit()
